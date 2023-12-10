@@ -1,4 +1,3 @@
-
 `timescale 1ns / 1ps
 
 module tb_ram;
@@ -51,26 +50,32 @@ module tb_ram;
     #10 rst = 0;
 
     // Write operation
-
     #10 data_in = 8'hAA;
-        wr_en = 1;
-       wr_add = 10'h03;
-    
-
+    wr_en = 1;
+    wr_add = 10'h03;
     #10 wr_en = 0;
 
     // Read operation
     #10 rd_en = 1;
     rd_add = 10'h03;
     #10 rd_en = 0;
+  end
 
-  
-end
-
-initial
-begin 
-$monitor("$time=%0d ",$time,"rst=%0h ",rst,"clk=%0h ",clk,"write_en=%0h ",wr_en,"rd_en=%0h ",rd_en,"data_in=%0h ",data_in,"data_out=%0h ",data_out,"wr_add=%0h ",wr_add,"rd_add=%0h ",rd_add,"write_memory=%0h ",uut.mem[wr_add],"read_memory=%0h ",uut.mem[rd_add]);
-  #90 $finish;
+  initial begin
+    $monitor(
+      "$time=%0d ", $time,
+      "rst=%0h ", rst,
+      "clk=%0h ", clk,
+      "write_en=%0h ", wr_en,
+      "rd_en=%0h ", rd_en,
+      "data_in=%0h ", data_in,
+      "data_out=%0h ", data_out,
+      "wr_add=%0h ", wr_add,
+      "rd_add=%0h ", rd_add,
+      "write_memory=%0h ", uut.mem[wr_add],
+      "read_memory=%0h ", uut.mem[rd_add]
+    );
+    #90 $finish;
   end
 
 endmodule
